@@ -151,16 +151,14 @@ def do_inference(cfg,
         model.to(device)
 
     model.eval()
-    img_path_list = []
 
-    for n_iter, (img, pid, camid, camids, target_view, imgpath) in enumerate(val_loader):
+    for img, pid, camid, camids, target_view, _ in val_loader:
         with torch.no_grad():
             img = img.to(device)
             camids = camids.to(device)
             target_view = target_view.to(device)
             feat = model(img, cam_label=camids, view_label=target_view)
             evaluator.update((feat, pid, camid))
-            img_path_list.extend(imgpath)
 
     cmc, mAP, _, _, _, _, _ = evaluator.compute()
     logger.info("Validation Results ")

@@ -1,6 +1,5 @@
 import torch
 import numpy as np
-import os
 from utils.reranking import re_ranking
 
 
@@ -9,7 +8,7 @@ def euclidean_distance(qf, gf):
     n = gf.shape[0]
     dist_mat = torch.pow(qf, 2).sum(dim=1, keepdim=True).expand(m, n) + \
                torch.pow(gf, 2).sum(dim=1, keepdim=True).expand(n, m).t()
-    dist_mat.addmm_(1, -2, qf, gf.t())
+    dist_mat.addmm_(qf, gf.t(), alpha=-2)
     return dist_mat.cpu().numpy()
 
 def cosine_similarity(qf, gf):
@@ -87,9 +86,9 @@ def eval_func(distmat, q_pids, g_pids, q_camids, g_camids, max_rank=50):
     return all_cmc, mAP
 
 
-class R1_mAP_eval():
+class R1_mAP_eval:
     def __init__(self, num_query, max_rank=50, feat_norm=True, reranking=False):
-        super(R1_mAP_eval, self).__init__()
+        super().__init__()
         self.num_query = num_query
         self.max_rank = max_rank
         self.feat_norm = feat_norm
