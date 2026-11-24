@@ -1,12 +1,12 @@
 MODEL:
   PRETRAIN_CHOICE: 'imagenet'
-  PRETRAIN_PATH: '/home/heshuting/.cache/torch/checkpoints/deit_base_distilled_patch16_224-df68dfff.pth'
+  PRETRAIN_PATH: 'weights/deit_base_distilled_patch16_224-df68dfff.pth'
   METRIC_LOSS_TYPE: 'triplet'
   IF_LABELSMOOTH: 'off'
   IF_WITH_CENTER: 'no'
   NAME: 'transformer'
   NO_MARGIN: True
-  DEVICE_ID: ('2')
+  DEVICE_ID: ('0')
   TRANSFORMER_TYPE: 'vit_base_patch16_224_TransReID'
   STRIDE_SIZE: [11, 11]
   SIE_CAMERA: True
@@ -25,7 +25,7 @@ INPUT:
 
 DATASETS:
   NAMES: ('occ_duke')
-  ROOT_DIR: ('../../data')
+  ROOT_DIR: ('../../datasets/datasets-person_reid')
 
 DATALOADER:
   SAMPLER: 'softmax_triplet'
@@ -54,6 +54,6 @@ TEST:
   NECK_FEAT: 'before'
   FEAT_NORM: 'yes'
 
-OUTPUT_DIR: '../logs/occ_duke_deit_transreid_stride11'
+OUTPUT_DIR: 'output/occ_duke_deit_transreid_stride11'
 
 

@@ -220,3 +220,6 @@ ENV/
 # Rope project settings
 .ropeproject
 
+# User-defined workspace files
+weights
+output

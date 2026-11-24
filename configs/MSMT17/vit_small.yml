@@ -1,6 +1,6 @@
 MODEL:
   PRETRAIN_CHOICE: 'imagenet'
-  PRETRAIN_PATH: '/home/heshuting/.cache/torch/checkpoints/vit_small_p16_224-15ec54c9.pth'
+  PRETRAIN_PATH: 'weights/vit_small_p16_224-15ec54c9.pth'
   METRIC_LOSS_TYPE: 'triplet'
   IF_LABELSMOOTH: 'off'
   IF_WITH_CENTER: 'no'
@@ -21,7 +21,7 @@ INPUT:
 
 DATASETS:
   NAMES: ('msmt17')
-  ROOT_DIR: ('../../data')
+  ROOT_DIR: ('../../datasets/datasets-person_reid')
 
 DATALOADER:
   SAMPLER: 'softmax_triplet'
@@ -50,6 +50,6 @@ TEST:
   NECK_FEAT: 'before'
   FEAT_NORM: 'yes'
 
-OUTPUT_DIR: '../logs/msmt17_vit_small'
+OUTPUT_DIR: 'output/msmt17_vit_small'
 
 
